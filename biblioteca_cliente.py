@@ -35,13 +35,23 @@ def entrarUsuario(email, senha):
                 if email == row[l][3]:
                     if row[l][8] == 'u':
                         os.system('cls')
-                        print('1 - Lista imoveis')
+                        print('1 - Lista imóveis')
                         print('2 - Ver seu perfil')
-                        print('3 - Abrir conversa')
+                        print('3 - Ver chat')
                         opcaoUsuario = int(input(''))
                         if opcaoUsuario == 1:
                             os.system('cls')
                             biblioteca_imovel.listar_imoveis()
+                    elif row[l][8] == 'd':
+                        os.system('cls')
+                        print('1 - Cadastrar imóvel')
+                        print('2 - Ver seu perfil')
+                        print('3 - Ver chat')
+                        opcaoUsuario = int(input(''))
+                        if opcaoUsuario ==  3:
+                            chat = str('')
+                            with open ('chat.txt', 'w') as arquivo:
+                                arquivo.writelines(chat)
     else:
         print("Email não existente, tente novamente")
 
