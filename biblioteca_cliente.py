@@ -33,27 +33,12 @@ def entrarUsuario(email, senha):
         for l in range(len(row)):
             for c in range(9):
                 if email == row[l][3]:
-                    if row[l][8] == 'u':
-                        os.system('cls')
-                        print('1 - Lista imóveis')
-                        print('2 - Ver seu perfil')
-                        print('3 - Ver chat')
-                        opcaoUsuario = int(input(''))
-                        if opcaoUsuario == 1:
-                            os.system('cls')
-                            biblioteca_imovel.listar_imoveis()
-                    elif row[l][8] == 'd':
-                        os.system('cls')
-                        print('1 - Cadastrar imóvel')
-                        print('2 - Ver seu perfil')
-                        print('3 - Ver chat')
-                        opcaoUsuario = int(input(''))
-                        if opcaoUsuario ==  3:
-                            chat = str('')
-                            with open ('chat.txt', 'w') as arquivo:
-                                arquivo.writelines(chat)
+                    if senha == row[l][4]:
+                        return 1
+
     else:
-        print("Email não existente, tente novamente")
+        print("Email existente, tente novamente")
+        return 0
 
 
 def cadastrarUsuario():
@@ -66,7 +51,6 @@ def cadastrarUsuario():
     mes = input('Mês: ')
     ano = input('Ano: ')
     cpf = input	('CPF: ')
-
     tipoDeConta = input("Você é Universitario(digite u) ou Dono de imovel(digite d): ")
 
     seleciona = "SELECT email FROM clientes WHERE email ='{}'".format(email)
@@ -83,7 +67,7 @@ def cadastrarUsuario():
         # print(cursor.fetchall())
         conn.commit()
 
-def listar_usuario():
+def listarTodosUsuarios():
     os.system('cls')
     cursor.execute("SELECT * FROM clientes;")
     row=cursor.fetchall()
@@ -91,4 +75,27 @@ def listar_usuario():
     for l in range(len(row)):
         for c in range(9):
             print(row[l][c], end=" ")
-        print("") 
+        print("")
+
+def listarUsuario(email, senha):
+    os.system('cls')
+    cursor.execute("SELECT * FROM clientes;")
+    row=cursor.fetchall()
+
+    for l in range(len(row)):
+            for c in range(9):
+                if email == row[l][3]:
+                    if senha == row[l][4]:
+                       print(row[l][c], end=" ")
+                    print('')
+
+def listarEmail():
+    os.system('cls')
+    cursor.execute("SELECT * FROM clientes;")
+    row=cursor.fetchall()
+
+    for l in range(len(row)):
+        if row[l][8] == 'u':
+            print(row[l][3], end=" ")
+            print('')
+        
